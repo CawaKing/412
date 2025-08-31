@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Juego del Impostor</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- PANTALLA: MULTIJUGADOR -->
+  <section id="screen-multiplayer" class="screen visible">
+    <h1 class="title">412</h1>
+
+    <div class="card">
+      <h2>Modo Multijugador</h2>
+      <div class="input-row">
+        <input type="text" id="playerName" placeholder="Tu nombre" maxlength="20" />
+      </div>
+      <div class="category-row">
+        <button class="btn" onclick="createRoom()">Crear Sala</button>
+        <button class="btn" onclick="showJoinRoom()">Unirse a Sala</button>
+      </div>
+
+      <div id="join-room-section" style="display: none; margin-top: 15px;">
+        <div class="input-row">
+          <input type="text" id="roomCode" placeholder="Código de sala" maxlength="6" />
+          <button class="btn" onclick="joinRoom()">Unirse</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <button class="btn" onclick="goToSinglePlayer()">Modo Un Jugador</button>
+    </div>
+  </section>
+
+  <!-- PANTALLA: SALA DE ESPERA -->
+  <section id="screen-lobby" class="screen">
+    <h1 class="title">412</h1>
+
+    <div class="card">
+      <h2>Sala: <span id="lobbyRoomCode"></span></h2>
+      <p>Comparte este código con tus amigos</p>
+      <div id="playersList"></div>
+
+      <div id="hostConfig" style="display: none; margin-top: 15px;">
+        <h3>Configuración del Juego</h3>
+        <div class="grid-2">
+          <div>
+            <label for="onlineImpostorCount">Número de impostores (1–10)</label>
+            <input type="number" id="onlineImpostorCount" min="1" max="10" value="1" />
+          </div>
+          <div>
+            <label for="onlineDifficulty">Nivel de dificultad</label>
+            <select id="onlineDifficulty" style="width: 100%; padding: 12px; border: 2px solid var(--green); border-radius: 10px; background: #0a1a0a; color: var(--fg); font-size: 14px;">
+              <option value="principiante">⭐ Nivel Principiante</option>
+              <option value="intermedio">⚽ Nivel Intermedio</option>
+              <option value="dificil">🔥 Nivel Difícil</option>
+              <option value="estrella">🌟 Nivel Estrella</option>
+              <option value="cuatrodocedos">🏆 Nivel 412</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <button id="startGameBtn" class="btn start-btn" onclick="startMultiplayerGame()" style="display: none;">Iniciar Juego</button>
+    </div>
+  </section>
+
+  <!-- PANTALLA: INICIO -->
+  <section id="screen-setup" class="screen">
+    <h1 class="title">412</h1>
+
+    <div class="card">
+      <button class="btn" onclick="goToMultiplayer()">← Volver a Multijugador</button>
+    </div>
+
+    <div class="card">
+      <h2>Niveles de Dificultad</h2>
+      <div class="category-row">
+        <button id="btn-principiante" class="btn" onclick="selectCategory('principiante','btn-principiante')">⭐ Nivel Principiante</button>
+        <button id="btn-intermedio" class="btn" onclick="selectCategory('intermedio','btn-intermedio')">⚽ Nivel Intermedio</button>
+        <button id="btn-dificil" class="btn" onclick="selectCategory('dificil','btn-dificil')">🔥 Nivel Difícil</button>
+        <button id="btn-estrella" class="btn" onclick="selectCategory('estrella','btn-estrella')">🌟 Nivel Estrella</button>
+        <button id="btn-cuatrodocedos" class="btn" onclick="selectCategory('cuatrodocedos','btn-cuatrodocedos')">🏆 Nivel 412</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Palabras personalizadas</h2>
+      <div class="input-row">
+        <input type="text" id="wordInput" placeholder="Ingresa una palabra" />
+        <button class="btn" onclick="addWord()">Agregar</button>
+      </div>
+      <p id="wordList" class="wordlist"></p>
+    </div>
+
+    <div class="card">
+      <h2>Jugadores e impostores</h2>
+      <div class="grid-2">
+        <div>
+          <label for="playerCount">Número de jugadores (1–20)</label>
+          <input type="number" id="playerCount" min="1" max="20" />
+        </div>
+        <div>
+          <label for="impostorCount">Número de impostores (1–6)</label>
+          <input type="number" id="impostorCount" min="1" max="6" />
+        </div>
+      </div>
+    </div>
+
+    <button class="btn start-btn" onclick="startGame()">Iniciar juego</button>
+  </section>
+
+  <!-- PANTALLA: CARTAS/JUGADORES -->
+  <section id="screen-game" class="screen">
+    <h2 id="playerLabel"></h2>
+    <button id="cardButton" class="btn big" onclick="revealCard()">Ver carta</button>
+  </section>
+
+  <!-- PANTALLA: FINAL -->
+  <section id="screen-end" class="screen">
+    <h2 class="title end-title">¡Diviértanse y ganen!</h2>
+    <button class="btn reset-btn" onclick="resetGame()">Volver al inicio</button>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
